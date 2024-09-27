@@ -4,7 +4,8 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
 
-const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+const Recherche = Loadable(lazy(() => import('pages/component-overview/recherche')));
+const Workflow = Loadable(lazy(() => import('pages/component-overview/workflow')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
@@ -23,8 +24,8 @@ const MainRoutes = {
       element: <DashboardDefault />
     },
     {
-      path: 'color',
-      element: <Color />
+      path: 'recherche',
+      element: <Recherche />
     },
     {
       path: 'dashboard',
@@ -44,8 +45,8 @@ const MainRoutes = {
       element: <Shadow />
     },
     {
-      path: 'typography',
-      element: <Typography />
+      path: 'workflow',
+      element: <Workflow />
     }
   ]
 };

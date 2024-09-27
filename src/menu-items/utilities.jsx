@@ -30,10 +30,17 @@ const utilities = {
   type: 'group',
   children: [
     {
-      id: 'Archive',
-      title: 'Archive le document',
+      id: 'util-color',
+      title: 'Consultation Document',
       type: 'item',
-      url: '/typography',
+      url: '/recherche',
+      icon: icons.SearchOutlined
+    },
+    {
+      id: 'Archive',
+      title: 'Workflow',
+      type: 'item',
+      url: '/workflow',
       icon: icons.UserOutlined
     },
     {
@@ -42,14 +49,6 @@ const utilities = {
       type: 'item',
       url: '/typography',
       icon: icons.UserOutlined
-    },
-
-    {
-      id: 'util-color',
-      title: 'Consultation',
-      type: 'item',
-      url: '/color',
-      icon: icons.SearchOutlined
     },
 
     {
