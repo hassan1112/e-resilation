@@ -16,14 +16,14 @@ export default function StatResilation() {
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between">
+      <Grid container alignItems='center' justifyContent='space-between'>
         <Grid item>
-          <Typography variant="h5">Statistics de resilation</Typography>
+          <Typography variant='h5'>Statistics de resilation</Typography>
         </Grid>
         <Grid item>
-          <Stack direction="row" alignItems="center" spacing={0}>
+          <Stack direction='row' alignItems='center' spacing={0}>
             <Button
-              size="small"
+              size='small'
               onClick={() => setSlot('month')}
               color={slot === 'month' ? 'primary' : 'secondary'}
               variant={slot === 'month' ? 'outlined' : 'text'}
@@ -31,7 +31,7 @@ export default function StatResilation() {
               Month
             </Button>
             <Button
-              size="small"
+              size='small'
               onClick={() => setSlot('week')}
               color={slot === 'week' ? 'primary' : 'secondary'}
               variant={slot === 'week' ? 'outlined' : 'text'}
