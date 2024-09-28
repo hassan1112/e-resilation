@@ -1,4 +1,3 @@
-// assets
 import {
   AppstoreAddOutlined,
   AntDesignOutlined,
@@ -30,33 +29,31 @@ const utilities = {
   type: 'group',
   children: [
     {
-      id: 'Archive',
-      title: 'Archive le document',
-      type: 'item',
-      url: '/typography',
-      icon: icons.UserOutlined
-    },
-    {
-      id: 'util-typography',
-      title: 'User Managment',
-      type: 'item',
-      url: '/typography',
-      icon: icons.UserOutlined
-    },
-
-    {
       id: 'util-color',
-      title: 'Consultation',
+      title: 'Consultation Document',
       type: 'item',
-      url: '/color',
+      url: '/recherche',
       icon: icons.SearchOutlined
     },
-
+    {
+      id: 'Archive',
+      title: 'Workflow',
+      type: 'item',
+      url: '/workflow',
+      icon: icons.AppstoreAddOutlined // Nouvelle icône pour le workflow
+    },
     {
       id: 'util-shadow',
       title: 'Print',
       type: 'item',
-      url: '/dashboard',
+      url: '/scan',
+      icon: icons.BarcodeOutlined
+    },
+    {
+      id: 'decharge',
+      title: 'E-decharge',
+      type: 'item',
+      url: '/decharge',
       icon: icons.BarcodeOutlined
     }
   ]

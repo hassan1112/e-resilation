@@ -4,12 +4,19 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
 
+
+const Recherche = Loadable(lazy(() => import('pages/component-overview/recherche')));
+const Scan = Loadable(lazy(() => import('pages/component-overview/scan')));
+const Workflow = Loadable(lazy(() => import('pages/component-overview/workflow')));
+const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
+
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 const Typography = Loadable(
   lazy(() => import('pages/component-overview/typography'))
 );
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
+const Decharge = Loadable(lazy(() => import('pages/component-overview/decharge')));
 
 // render - sample page
 const SamplePage = Loadable(
@@ -27,8 +34,13 @@ const MainRoutes = {
       element: <DashboardDefault />,
     },
     {
+
+      path: 'recherche',
+      element: <Recherche />
+
       path: 'color',
       element: <Color />,
+
     },
     {
       path: 'dashboard',
@@ -48,10 +60,26 @@ const MainRoutes = {
       element: <Shadow />,
     },
     {
+
+      path: 'workflow',
+      element: <Workflow />
+    },
+    {
+      path: 'scan',
+      element: <Scan />
+    },
+    {
+      path: 'decharge',
+      element: <Decharge />
+    }
+    
+  ]
+
       path: 'typography',
       element: <Typography />,
     },
   ],
+
 };
 
 export default MainRoutes;

@@ -1,6 +1,4 @@
 import React from 'react';
-
-// Import Material-UI components
 import {
   Typography,
   Table,
@@ -9,70 +7,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
   IconButton
 } from '@mui/material';
-
-// Import Material-UI icons
 import CheckCircleIcon from '@mui/icons-material/CheckCircleTwoTone';
 import BlockIcon from '@mui/icons-material/BlockOutlined';
 import CancelIcon from '@mui/icons-material/Cancel';
-// project import
 import MainCard from 'components/MainCard';
 
-// sample data
-const idCardRequests = [
-  {
-    requestId: 'REQ-001',
-    firstName: 'John',
-    lastName: 'Doe',
-    dob: '1990-01-01',
-    jobTitle: 'Software Engineer'
-  },
-  {
-    requestId: 'REQ-002',
-    firstName: 'Jane',
-    lastName: 'Doe',
-    dob: '1995-06-01',
-    jobTitle: 'Marketing Manager'
-  },
-  {
-    requestId: 'REQ-003',
-    firstName: 'Bob',
-    lastName: 'Smith',
-    dob: '1980-03-01',
-    jobTitle: 'Sales Representative'
-  }
-];
-
-// ==============================|| SAMPLE PAGE ||============================== //
-
-export default function SamplePage() {
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const [selectedRequestId, setSelectedRequestId] = React.useState('');
-
-  const [action, setAction] = React.useState('');
-  const [comments, setComments] = React.useState('');
-
-  const handleSubmitAction = () => {
-    // Handle the selected action and comments here
-    console.log(action, comments);
-    setOpenDialog(false);
-  };
-
+export default function ConsultationTable() {
   const handleApprove = (requestId) => {
-    setSelectedRequestId(requestId);
-    setOpenDialog(true);
+    console.log(`Approve request ${requestId}`);
   };
 
   const handleBlock = (requestId) => {
@@ -83,36 +27,26 @@ export default function SamplePage() {
     console.log(`Reject request ${requestId}`);
   };
 
-  const handleSubmit = () => {
-    console.log(`Approve request ${selectedRequestId} with comments: ${comments}`);
-    setOpenDialog(false);
-  };
-
   return (
-    <MainCard title="ID Card Issuance Approval">
-      {/* <Typography variant="body2">
-       
-      </Typography> */}
+    <MainCard title="Consultation Requests">
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Request ID</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>DOB</TableCell>
-              <TableCell>Job Title</TableCell>
+              <TableCell>NNI</TableCell>
+              <TableCell>Numéro de Titre</TableCell>
+              <TableCell>Type</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {idCardRequests.map((request) => (
+            {consultationData.map((request) => (
               <TableRow key={request.requestId}>
                 <TableCell>{request.requestId}</TableCell>
-                <TableCell>{request.firstName}</TableCell>
-                <TableCell>{request.lastName}</TableCell>
-                <TableCell>{request.dob}</TableCell>
-                <TableCell>{request.jobTitle}</TableCell>
+                <TableCell>{request.nni}</TableCell>
+                <TableCell>{request.titleNumber}</TableCell>
+                <TableCell>{request.type}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleApprove(request.requestId)}>
                     <CheckCircleIcon />
@@ -129,34 +63,6 @@ export default function SamplePage() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-        <DialogTitle>Request Action</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Please select an action and enter your comments for request {selectedRequestId}</DialogContentText>
-          <FormControl fullWidth>
-            <InputLabel id="action-label">Action</InputLabel>
-            <Select labelId="action-label" id="action" value={action} label="Action" onChange={(e) => setAction(e.target.value)}>
-              <MenuItem value="approve">Approve</MenuItem>
-              <MenuItem value="reject">Reject</MenuItem>
-              <MenuItem value="block">Block</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="comments"
-            label="Comments"
-            type="text"
-            fullWidth
-            value={comments}
-            onChange={(e) => setComments(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={() => handleSubmitAction()}>Submit</Button>
-        </DialogActions>
-      </Dialog>
     </MainCard>
   );
 }
