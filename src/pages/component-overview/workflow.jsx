@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Grid, TextField, InputAdornment, IconButton, Table, TableHead, TableBody, TableRow, TableCell, Button, Modal, Paper, Typography, Popover, Snackbar } from '@mui/material';
-import { Search, CheckCircle, Cancel } from '@mui/icons-material';  // Import des icônes
+import { Grid, TextField, InputAdornment, IconButton, Table, TableHead, TableBody, TableRow, TableCell, Button, Modal, Paper, Typography, Popover, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Search, CheckCircle, Cancel } from '@mui/icons-material';
 import MainCard from 'components/MainCard';
 import ComponentSkeleton from './ComponentSkeleton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const generateRandomNNI = () => Math.floor(1000000000 + Math.random() * 9000000000).toString();
 
@@ -16,8 +18,8 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                             <TableCell>Request ID</TableCell>
                             <TableCell>NNI</TableCell>
                             <TableCell>Numéro de titre</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Operateur</TableCell>
+                            <TableCell>Date d'ajout</TableCell>
+                            <TableCell>Ajouté par</TableCell>
                             <TableCell>Statut</TableCell>
                         </TableRow>
                     </TableHead>
@@ -29,8 +31,8 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     item.requestId.toLowerCase().includes(searchTerm) ||
                                     item.NNI.toLowerCase().includes(searchTerm) ||
                                     item.Num_Titre.toLowerCase().includes(searchTerm) ||
-                                    item.DATE.toLowerCase().includes(searchTerm) ||
-                                    item.Operateur.toLowerCase().includes(searchTerm)
+                                    item.dateAjout.toLowerCase().includes(searchTerm) ||
+                                    item.ajoutPar.toLowerCase().includes(searchTerm)
                                 );
                             })
                             .map((item) => (
@@ -41,14 +43,14 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     onMouseLeave={onMouseLeave}
                                     style={{
                                         cursor: 'pointer',
-                                        backgroundColor: hoveredRow === item.requestId ? '#f5f5f5' : 'inherit', // Change la couleur de fond au survol
+                                        backgroundColor: hoveredRow === item.requestId ? '#f5f5f5' : 'inherit',
                                     }}
                                 >
                                     <TableCell>{item.requestId}</TableCell>
                                     <TableCell>{item.NNI}</TableCell>
                                     <TableCell>{item.Num_Titre}</TableCell>
-                                    <TableCell>{item.DATE}</TableCell>
-                                    <TableCell>{item.Operateur}</TableCell>
+                                    <TableCell>{item.dateAjout}</TableCell>
+                                    <TableCell>{item.ajoutPar}</TableCell>
                                     <TableCell>{item.status}</TableCell>
                                 </TableRow>
                             ))}
@@ -66,8 +68,8 @@ export default function Component() {
             requestId: 'REQ-001',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1001',
-            DATE: '2024-01-01',
-            Operateur: 'Admin',
+            dateAjout: '2024-01-01',
+            ajoutPar: 'Admin',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
         },
@@ -75,8 +77,8 @@ export default function Component() {
             requestId: 'REQ-002',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1002',
-            DATE: '2024-06-01',
-            Operateur: 'JohnDoe',
+            dateAjout: '2024-06-01',
+            ajoutPar: 'JohnDoe',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
         },
@@ -84,19 +86,17 @@ export default function Component() {
             requestId: 'REQ-003',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1003',
-            DATE: '2024-03-01',
-            Operateur: 'JaneSmith',
+            dateAjout: '2024-03-01',
+            ajoutPar: 'JaneSmith',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
         },
     ]);
-
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [open, setOpen] = useState(false);
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [comment, setComment] = useState('');
     const [popoverAnchor, setPopoverAnchor] = useState(null);
-    const [showNotification, setShowNotification] = useState(false);
-    const [isRejected, setIsRejected] = useState(false);
     const [hoveredRow, setHoveredRow] = useState(null);
 
     const handleSearch = (event) => {
@@ -114,18 +114,22 @@ export default function Component() {
     };
 
     const handleValidate = () => {
+        setConfirmDialogOpen(true); // Ouvrir le dialog de confirmation
+    };
+
+    const handleConfirmValidate = () => {
         setData((prevData) =>
             prevData.map((doc) =>
                 doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Validé' } : doc
             )
         );
-        setShowNotification(true);
+        toast.success(`Le document ${selectedDocument?.requestId} a été validé avec succès !`);
+        setConfirmDialogOpen(false);
         setOpen(false);
     };
 
     const handleRejectClick = (event) => {
         setPopoverAnchor(event.currentTarget);
-        setIsRejected(true);
     };
 
     const handleCommentChange = (event) => {
@@ -138,13 +142,9 @@ export default function Component() {
                 doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Rejeté' } : doc
             )
         );
-        setShowNotification(true);
+        toast.error(`Le document ${selectedDocument?.requestId} a été rejeté avec succès !`);
         setPopoverAnchor(null);
         setOpen(false);
-    };
-
-    const handleNotificationClose = () => {
-        setShowNotification(false);
     };
 
     const handleMouseEnter = (requestId) => {
@@ -163,7 +163,7 @@ export default function Component() {
                         fullWidth
                         value={searchQuery}
                         onChange={handleSearch}
-                        placeholder="Recherche par Request ID, NNI, Numéro de Titre, Date, ou Operateur"
+                        placeholder="Recherche par Request ID, NNI, Numéro de Titre, Date d'ajout, ou Ajouté par"
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -191,27 +191,17 @@ export default function Component() {
                         <>
                             <iframe
                                 src={selectedDocument.pdfUrl}
-                                style={{ width: '100%', height: '86%', border: 'none' }}
+                                style={{ width: '100%', height: '80%', border: 'none' }}
                                 title={`Aperçu du document ${selectedDocument.Num_Titre}`}
                             />
                             <Grid container spacing={2} justifyContent="center" style={{ marginTop: '20px' }}>
                                 <Grid item>
-                                    <Button
-                                        variant="contained"
-                                        color="success"
-                                        onClick={handleValidate}
-                                        startIcon={<CheckCircle />} // Icône pour le bouton Valider
-                                    >
+                                    <Button variant="contained" color="primary" onClick={handleValidate} startIcon={<CheckCircle />}>
                                         Valider
                                     </Button>
                                 </Grid>
                                 <Grid item>
-                                    <Button
-                                        variant="outlined"
-                                        color="error"
-                                        onClick={handleRejectClick}
-                                        startIcon={<Cancel />} // Icône pour le bouton Rejeter
-                                    >   
+                                    <Button variant="outlined" color="error" onClick={handleRejectClick} startIcon={<Cancel />}>
                                         Rejeter
                                     </Button>
                                 </Grid>
@@ -221,50 +211,46 @@ export default function Component() {
                 </Paper>
             </Modal>
 
+            <Dialog
+                open={confirmDialogOpen}
+                onClose={() => setConfirmDialogOpen(false)}
+                BackdropProps={{
+                    style: { backgroundColor: 'transparent' } // Rendre l'arrière-plan transparent
+                }}
+            >
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                    <Typography>
+                        Êtes-vous sûr de vouloir valider le document {selectedDocument?.requestId} ?
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setConfirmDialogOpen(false)} color="primary">
+                        Annuler
+                    </Button>
+                    <Button onClick={handleConfirmValidate} color="primary">
+                        Valider
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
             <Popover
                 open={Boolean(popoverAnchor)}
                 anchorEl={popoverAnchor}
                 onClose={() => setPopoverAnchor(null)}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
                 <div style={{ padding: '20px', maxWidth: '300px' }}>
                     <Typography variant="subtitle1">Commentaire :</Typography>
-                    <TextField
-                        fullWidth
-                        multiline
-                        rows={4}
-                        value={comment}
-                        onChange={handleCommentChange}
-                        placeholder="Ajouter un commentaire pour le rejet"
-                    />
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{ marginTop: '10px' }}
-                        onClick={handleSubmitRejection}
-                    >
+                    <TextField fullWidth multiline rows={4} value={comment} onChange={handleCommentChange} placeholder="Ajouter un commentaire pour le rejet" />
+                    <Button variant="contained" color="secondary" style={{ marginTop: '10px' }} onClick={handleSubmitRejection}>
                         Soumettre le rejet
                     </Button>
                 </div>
             </Popover>
 
-            <Snackbar
-                open={showNotification}
-                onClose={handleNotificationClose}
-                message={
-                    isRejected
-                        ? `Le document ${selectedDocument?.requestId} a été rejeté avec succès !`
-                        : `Le document ${selectedDocument?.requestId} a été validé avec succès !`
-                }
-                autoHideDuration={3000}
-            />
+            <ToastContainer />
         </ComponentSkeleton>
     );
 }

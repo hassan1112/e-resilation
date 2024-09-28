@@ -16,8 +16,8 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                             <TableCell>Request ID</TableCell>
                             <TableCell>NNI</TableCell>
                             <TableCell>Numéro de titre</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Operateur</TableCell>
+                            <TableCell>Date d'ajout</TableCell>
+                            <TableCell>Ajouté par</TableCell>
                             <TableCell>Statut</TableCell>
                         </TableRow>
                     </TableHead>
@@ -29,7 +29,7 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     item.requestId.toLowerCase().includes(searchTerm) ||
                                     item.NNI.toLowerCase().includes(searchTerm) ||
                                     item.Num_Titre.toLowerCase().includes(searchTerm) ||
-                                    item.DATE.toLowerCase().includes(searchTerm) ||
+                                    item.addedDate.toLowerCase().includes(searchTerm) ||
                                     item.Operateur.toLowerCase().includes(searchTerm)
                                 );
                             })
@@ -41,13 +41,13 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     onMouseLeave={onMouseLeave}
                                     style={{
                                         cursor: 'pointer',
-                                        backgroundColor: hoveredRow === item.requestId ? '#f5f5f5' : 'inherit', // Change la couleur de fond au survol
+                                        backgroundColor: hoveredRow === item.requestId ? '#f5f5f5' : 'inherit',
                                     }}
                                 >
                                     <TableCell>{item.requestId}</TableCell>
                                     <TableCell>{item.NNI}</TableCell>
                                     <TableCell>{item.Num_Titre}</TableCell>
-                                    <TableCell>{item.DATE}</TableCell>
+                                    <TableCell>{item.addedDate}</TableCell>
                                     <TableCell>{item.Operateur}</TableCell>
                                     <TableCell>{item.status}</TableCell>
                                 </TableRow>
@@ -66,28 +66,43 @@ export default function Component() {
             requestId: 'REQ-001',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1001',
-            DATE: '2024-01-01',
+            addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
+            validatedBy: null,
+            validationDate: null,
+            rejectedBy: null,
+            rejectionDate: null,
+            rejectionComment: null,
         },
         {
             requestId: 'REQ-002',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1002',
-            DATE: '2024-06-01',
+            addedDate: '2024-06-01',
             Operateur: 'JohnDoe',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
+            validatedBy: null,
+            validationDate: null,
+            rejectedBy: null,
+            rejectionDate: null,
+            rejectionComment: null,
         },
         {
             requestId: 'REQ-003',
             NNI: generateRandomNNI(),
             Num_Titre: 'TIT-1003',
-            DATE: '2024-03-01',
+            addedDate: '2024-03-01',
             Operateur: 'JaneSmith',
             pdfUrl: 'doc.pdf',
             status: 'En attente',
+            validatedBy: null,
+            validationDate: null,
+            rejectedBy: null,
+            rejectionDate: null,
+            rejectionComment: null,
         },
     ]);
 
@@ -96,8 +111,7 @@ export default function Component() {
     const [comment, setComment] = useState('');
     const [popoverAnchor, setPopoverAnchor] = useState(null);
     const [showNotification, setShowNotification] = useState(false);
-    const [isRejected, setIsRejected] = useState(false);
-    const [hoveredRow, setHoveredRow] = useState(null); // État pour suivre la ligne survolée
+    const [hoveredRow, setHoveredRow] = useState(null);
 
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
@@ -116,7 +130,9 @@ export default function Component() {
     const handleValidate = () => {
         setData((prevData) =>
             prevData.map((doc) =>
-                doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Validé' } : doc
+                doc.requestId === selectedDocument.requestId
+                    ? { ...doc, status: 'Validé', validatedBy: 'UtilisateurX', validationDate: new Date().toLocaleDateString() }
+                    : doc
             )
         );
         setShowNotification(true);
@@ -125,7 +141,6 @@ export default function Component() {
 
     const handleRejectClick = (event) => {
         setPopoverAnchor(event.currentTarget);
-        setIsRejected(true);
     };
 
     const handleCommentChange = (event) => {
@@ -135,7 +150,9 @@ export default function Component() {
     const handleSubmitRejection = () => {
         setData((prevData) =>
             prevData.map((doc) =>
-                doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Rejeté' } : doc
+                doc.requestId === selectedDocument.requestId
+                    ? { ...doc, status: 'Rejeté', rejectedBy: 'UtilisateurY', rejectionDate: new Date().toLocaleDateString(), rejectionComment: comment }
+                    : doc
             )
         );
         setShowNotification(true);
@@ -145,15 +162,6 @@ export default function Component() {
 
     const handleNotificationClose = () => {
         setShowNotification(false);
-    };
-
-    // Fonction pour gérer le survol de la ligne
-    const handleMouseEnter = (requestId) => {
-        setHoveredRow(requestId);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredRow(null);
     };
 
     return (
@@ -181,8 +189,8 @@ export default function Component() {
                     searchQuery={searchQuery}
                     onRowClick={handleRowClick}
                     hoveredRow={hoveredRow}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={(requestId) => setHoveredRow(requestId)}
+                    onMouseLeave={() => setHoveredRow(null)}
                 />
             </Grid>
 
@@ -190,74 +198,23 @@ export default function Component() {
                 <Paper style={{ margin: 'auto', maxWidth: '900px', height: '750px' }}>
                     {selectedDocument && (
                         <>
-
                             <iframe
                                 src={selectedDocument.pdfUrl}
-                                style={{ width: '100%', height: '86%', border: 'none' }}
+                                style={{ width: '100%', height: '80%', border: 'none' }}
                                 title={`Aperçu du document ${selectedDocument.Num_Titre}`}
                             />
-                            <Grid container spacing={2} justifyContent="center" style={{ marginTop: '20px' }}>
-                                <Grid item>
-                                    <Button variant="contained" color="success" onClick={handleValidate}>
-                                        Valider
-                                    </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" color="error" onClick={handleRejectClick}>
-                                        Rejeter
-                                    </Button>
+                            <Grid container spacing={2} style={{ padding: '20px' }}>
+                                <Grid item xs={12}>
+                                    <Typography>Ajouté par : {selectedDocument.Operateur}</Typography>
+                                    <Typography>Date : {selectedDocument.addedDate}</Typography>
+                                    <Typography>Commentaire : {selectedDocument.rejectionComment || 'Aucun commentaire'}</Typography>
+                                    <Typography>Statut : {selectedDocument.status}</Typography>
                                 </Grid>
                             </Grid>
                         </>
                     )}
                 </Paper>
             </Modal>
-
-            <Popover
-                open={Boolean(popoverAnchor)}
-                anchorEl={popoverAnchor}
-                onClose={() => setPopoverAnchor(null)}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-            >
-                <div style={{ padding: '20px', maxWidth: '300px' }}>
-                    <Typography variant="subtitle1">Commentaire :</Typography>
-                    <TextField
-                        fullWidth
-                        multiline
-                        rows={4}
-                        value={comment}
-                        onChange={handleCommentChange}
-                        placeholder="Ajouter un commentaire pour le rejet"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        style={{ marginTop: '10px' }}
-                        onClick={handleSubmitRejection}
-                    >
-                        Soumettre le rejet
-                    </Button>
-                </div>
-            </Popover>
-
-            {/* Snackbar pour la notification de succès */}
-            <Snackbar
-                open={showNotification}
-                onClose={handleNotificationClose}
-                message={
-                    isRejected
-                        ? `Le document ${selectedDocument?.requestId} a été rejeté avec succès !`
-                        : `Le document ${selectedDocument?.requestId} a été validé avec succès !`
-                }
-                autoHideDuration={3000} // Délai de fermeture automatique
-            />
         </ComponentSkeleton>
     );
 }

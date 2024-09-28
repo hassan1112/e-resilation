@@ -1,4 +1,3 @@
-// assets
 import {
   AppstoreAddOutlined,
   AntDesignOutlined,
@@ -41,21 +40,20 @@ const utilities = {
       title: 'Workflow',
       type: 'item',
       url: '/workflow',
-      icon: icons.UserOutlined
+      icon: icons.AppstoreAddOutlined // Nouvelle icône pour le workflow
     },
-    {
-      id: 'util-typography',
-      title: 'User Managment',
-      type: 'item',
-      url: '/typography',
-      icon: icons.UserOutlined
-    },
-
     {
       id: 'util-shadow',
       title: 'Print',
       type: 'item',
-      url: '/dashboard',
+      url: '/scan',
+      icon: icons.BarcodeOutlined
+    },
+    {
+      id: 'decharge',
+      title: 'E-decharge',
+      type: 'item',
+      url: '/decharge',
       icon: icons.BarcodeOutlined
     }
   ]
