@@ -18,7 +18,7 @@ const LogoSection = ({ sx, to }) => {
       <Stack direction="row" spacing={1} alignItems="center">
         {/* <Logo /> */}
         <Chip
-          label="ID card solution logo" //{import.meta.env.VITE_APP_VERSION}
+          label="E-resiliation" //{import.meta.env.VITE_APP_VERSION}
           variant="outlined"
           size="small"
           color="secondary"

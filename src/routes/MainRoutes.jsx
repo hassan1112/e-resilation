@@ -4,13 +4,24 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
 
-const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+
+const Recherche = Loadable(lazy(() => import('pages/component-overview/recherche')));
+const Scan = Loadable(lazy(() => import('pages/component-overview/scan')));
+const Workflow = Loadable(lazy(() => import('pages/component-overview/workflow')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
+
+const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+const Typography = Loadable(
+  lazy(() => import('pages/component-overview/typography'))
+);
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
+const Decharge = Loadable(lazy(() => import('pages/component-overview/decharge')));
 
 // render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const SamplePage = Loadable(
+  lazy(() => import('pages/extra-pages/sample-page'))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -20,34 +31,55 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <DashboardDefault />,
     },
     {
+
+      path: 'recherche',
+      element: <Recherche />
+
       path: 'color',
-      element: <Color />
+      element: <Color />,
+
     },
     {
       path: 'dashboard',
       children: [
         {
           path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
+          element: <DashboardDefault />,
+        },
+      ],
     },
     {
       path: 'sample-page',
-      element: <SamplePage />
+      element: <SamplePage />,
     },
     {
       path: 'shadow',
-      element: <Shadow />
+      element: <Shadow />,
     },
     {
-      path: 'typography',
-      element: <Typography />
+
+      path: 'workflow',
+      element: <Workflow />
+    },
+    {
+      path: 'scan',
+      element: <Scan />
+    },
+    {
+      path: 'decharge',
+      element: <Decharge />
     }
+    
   ]
+
+      path: 'typography',
+      element: <Typography />,
+    },
+  ],
+
 };
 
 export default MainRoutes;
