@@ -34,11 +34,11 @@ export default function DocumentDischarge() {
     const [personNNI, setPersonNNI] = useState('');
     const [personPhone, setPersonPhone] = useState('');
     const [openModal, setOpenModal] = useState(false);
-    const [pdfData, setPdfData] = useState(null); // État pour les données du PDF
+    const [pdfData, setPdfData] = useState(null); 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Préparer les données pour le PDF
+
         const pdfDocument = {
             documentInfo: {
                 documentNNI,
@@ -51,32 +51,32 @@ export default function DocumentDischarge() {
                 phone: personPhone,
             },
         };
-        setPdfData(pdfDocument); // Stocker les données pour le PDF
-        setOpenModal(true); // Ouvrir le modal
+        setPdfData(pdfDocument); 
+        setOpenModal(true);
     };
 
     const handleClose = () => {
         setOpenModal(false);
-        // Réinitialiser les champs si nécessaire
+      
         setDocumentNNI('');
         setDocumentNumTitre('');
         setPersonName('');
         setPersonFirstName('');
         setPersonNNI('');
         setPersonPhone('');
-        setPdfData(null); // Réinitialiser les données du PDF
+        setPdfData(null); 
     };
 
     const handleValidate = () => {
-        // Logique de validation ici
-        toast.success("Document validé !"); // Notification de succès
-        handleClose(); // Fermer le modal
+       
+        toast.success("Document validé !"); 
+        handleClose(); 
     };
 
     const handleRejectClick = () => {
-        // Logique de rejet ici
-        toast.error("Document rejeté !"); // Notification d'erreur
-        handleClose(); // Fermer le modal
+   
+        toast.error("Document rejeté !");
+        handleClose();
     };
 
     return (
