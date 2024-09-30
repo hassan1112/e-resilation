@@ -33,8 +33,8 @@ export default function ScanAndUploadComponent() {
     const [popoverAnchor, setPopoverAnchor] = useState(null);
     const [nni, setNni] = useState("");
     const [numeroTitre, setNumeroTitre] = useState("");
-    const [isArchived, setIsArchived] = useState(false); // État pour le switch
-    const userName = "Nom de l'utilisateur"; // Remplacez par le nom de l'utilisateur actuel
+    const [isArchived, setIsArchived] = useState(false); 
+    const userName = "Nom de l'utilisateur"; 
     const currentDate = new Date().toLocaleDateString(); // Date actuelle
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -66,7 +66,6 @@ export default function ScanAndUploadComponent() {
         toast.success("Document validé !");
         setPopoverAnchor(null);
         setOpen(false);
-        // Logique de soumission de validation avec NNI et numéro de titre
         console.log("Validé :", { nni, numeroTitre, isArchived, userName, currentDate });
     };
 
@@ -74,7 +73,7 @@ export default function ScanAndUploadComponent() {
         setPopoverAnchor(null);
         setNni("");
         setNumeroTitre("");
-        setIsArchived(false); // Réinitialiser le switch
+        setIsArchived(false); 
     };
 
     return (
@@ -117,7 +116,6 @@ export default function ScanAndUploadComponent() {
                                     color="secondary"
                                     style={{ marginTop: "20px" }}
                                     onClick={() => {
-                                        // Logique de numérisation ici
                                     }}
                                 >
                                     Démarrer le Scan
@@ -169,7 +167,7 @@ export default function ScanAndUploadComponent() {
                                     <Grid container spacing={2} justifyContent="center" style={{ marginTop: '20px' }}>
                                         <Grid item>
                                             <Button variant="contained" color="primary" onClick={handleValidate} startIcon={<CheckCircle />}>
-    
+
                                                 Confirmer
                                             </Button>
                                         </Grid>

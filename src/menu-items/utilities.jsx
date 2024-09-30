@@ -7,7 +7,7 @@ import {
   LoadingOutlined,
   UserOutlined
 } from '@ant-design/icons';
-import { SearchOutlined } from '@mui/icons-material';
+import { SearchOutlined, NoteAdd as NoteAddIcon } from '@mui/icons-material'; // Ajout de l'import de NoteAddIcon
 
 // icons
 const icons = {
@@ -18,7 +18,8 @@ const icons = {
   LoadingOutlined,
   AppstoreAddOutlined,
   UserOutlined,
-  SearchOutlined
+  SearchOutlined,
+  NoteAddIcon // Ajout de NoteAddIcon dans l'objet icons
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -44,10 +45,10 @@ const utilities = {
     },
     {
       id: 'util-shadow',
-      title: 'Print',
+      title: 'Nouvelle Demande',
       type: 'item',
       url: '/scan',
-      icon: icons.BarcodeOutlined
+      icon: icons.NoteAddIcon // Remplacement de l'icône par NoteAddIcon
     },
     {
       id: 'decharge',

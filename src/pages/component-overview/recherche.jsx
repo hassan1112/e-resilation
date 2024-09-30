@@ -215,7 +215,7 @@ export default function Component() {
             rejectedBy: null,
             rejectionDate: null,
             rejectionComment: null,
-        },
+        }
     ]);
 
     const [selectedDocument, setSelectedDocument] = useState(null);
