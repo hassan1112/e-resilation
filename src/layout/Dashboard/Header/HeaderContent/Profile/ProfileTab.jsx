@@ -24,18 +24,31 @@ export default function ProfileTab() {
   };
 
   return (
-    <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0, '/apps/profiles/user/personal')}>
+    <List
+      component='nav'
+      sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}
+    >
+      <ListItemButton
+        selected={selectedIndex === 0}
+        onClick={(event) =>
+          handleListItemClick(event, 0, '/apps/profiles/user/personal')
+        }
+      >
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
+        <ListItemText primary='Edit Profile' />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1, '/apps/profiles/account/basic')}>
+      <ListItemButton
+        selected={selectedIndex === 1}
+        onClick={(event) =>
+          handleListItemClick(event, 1, '/apps/profiles/account/basic')
+        }
+      >
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
-        <ListItemText primary="View Profile" />
+        <ListItemText primary='View Profile' />
       </ListItemButton>
 
       {/* <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3, 'apps/profiles/account/personal')}>
@@ -54,7 +67,7 @@ export default function ProfileTab() {
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
-        <ListItemText primary="Logout" />
+        <ListItemText primary='Logout' />
       </ListItemButton>
     </List>
   );

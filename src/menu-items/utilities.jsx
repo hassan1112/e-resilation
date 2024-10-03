@@ -5,9 +5,13 @@ import {
   BgColorsOutlined,
   FontSizeOutlined,
   LoadingOutlined,
-  UserOutlined
+  UserOutlined,
 } from '@ant-design/icons';
-import { SearchOutlined } from '@mui/icons-material';
+import {
+  SearchOutlined,
+  FolderZipOutlined,
+  NoteAddOutlined,
+} from '@mui/icons-material';
 
 // icons
 const icons = {
@@ -18,7 +22,9 @@ const icons = {
   LoadingOutlined,
   AppstoreAddOutlined,
   UserOutlined,
-  SearchOutlined
+  SearchOutlined,
+  FolderZipOutlined,
+  NoteAddOutlined,
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -33,30 +39,30 @@ const utilities = {
       title: 'Consultation Document',
       type: 'item',
       url: '/recherche',
-      icon: icons.SearchOutlined
+      icon: icons.SearchOutlined,
     },
     {
       id: 'Archive',
       title: 'Workflow',
       type: 'item',
       url: '/workflow',
-      icon: icons.AppstoreAddOutlined // Nouvelle icône pour le workflow
+      icon: icons.AppstoreAddOutlined, // Nouvelle icône pour le workflow
     },
     {
       id: 'util-shadow',
-      title: 'Print',
+      title: 'Archive',
       type: 'item',
       url: '/scan',
-      icon: icons.BarcodeOutlined
+      icon: icons.FolderZipOutlined,
     },
     {
       id: 'decharge',
       title: 'E-decharge',
       type: 'item',
       url: '/decharge',
-      icon: icons.BarcodeOutlined
-    }
-  ]
+      icon: icons.NoteAddOutlined,
+    },
+  ],
 };
 
 export default utilities;
