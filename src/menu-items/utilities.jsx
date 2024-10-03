@@ -10,12 +10,7 @@ import {
 
 import { SearchOutlined, NoteAdd as NoteAddIcon } from '@mui/icons-material'; // Ajout de l'import de NoteAddIcon
 
-import {
-  SearchOutlined,
-  FolderZipOutlined,
-  NoteAddOutlined,
-} from '@mui/icons-material';
-
+import { FolderZipOutlined, NoteAddOutlined } from '@mui/icons-material';
 
 // icons
 const icons = {
@@ -30,7 +25,6 @@ const icons = {
 
   FolderZipOutlined,
   NoteAddOutlined,
-
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -60,8 +54,7 @@ const utilities = {
       title: 'Nouvelle Demande',
       type: 'item',
       url: '/scan',
-      icon: icons.NoteAddIcon // Remplacement de l'icône par NoteAddIcon
-
+      icon: icons.NoteAddIcon, // Remplacement de l'icône par NoteAddIcon
     },
     {
       id: 'decharge',
