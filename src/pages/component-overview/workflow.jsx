@@ -18,9 +18,9 @@ function OrderStatus({ status }) {
             color = 'orange';
             title = 'En attente';
             break;
-        case 'Validé':
+        case 'Résilié':
             color = 'green';
-            title = 'Validé';
+            title = 'Résilié';
             break;
         case 'Rejeté':
             color = 'red';
@@ -146,7 +146,7 @@ export default function Component() {
         dateAjout: '2024-04-15',
         ajoutPar: 'Admin',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'Chagoua',
     },
     {
@@ -176,7 +176,7 @@ export default function Component() {
         dateAjout: '2024-05-10',
         ajoutPar: 'CharlieBlack',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'DSIS',
     },
     {
@@ -206,7 +206,7 @@ export default function Component() {
         dateAjout: '2024-12-25',
         ajoutPar: 'Admin',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'Klemat',
     },
     {
@@ -236,7 +236,7 @@ export default function Component() {
         dateAjout: '2024-04-09',
         ajoutPar: 'AliceBrown',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'Goudji',
     },
     {
@@ -256,7 +256,7 @@ export default function Component() {
         dateAjout: '2024-05-18',
         ajoutPar: 'BobGreen',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'Goudji',
     },
     {
@@ -286,7 +286,7 @@ export default function Component() {
         dateAjout: '2024-02-27',
         ajoutPar: 'Admin',
         pdfUrl: 'doc.pdf',
-        status: 'Validé',
+        status: 'Résilié',
         centre: 'Amriguebe',
     },
     {
@@ -338,10 +338,10 @@ export default function Component() {
     const handleConfirmValidate = () => {
         setData((prevData) =>
             prevData.map((doc) =>
-                doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Validé' } : doc
+                doc.requestId === selectedDocument.requestId ? { ...doc, status: 'Résilié' } : doc
             )
         );
-        toast.success(`Le document ${selectedDocument?.requestId} a été validé avec succès !`);
+        toast.success(`Le document ${selectedDocument?.requestId} a été Résilié avec succès !`);
         setConfirmDialogOpen(false);
         setOpen(false);
     };
