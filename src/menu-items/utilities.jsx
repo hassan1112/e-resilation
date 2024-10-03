@@ -7,11 +7,15 @@ import {
   LoadingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+
+import { SearchOutlined, NoteAdd as NoteAddIcon } from '@mui/icons-material'; // Ajout de l'import de NoteAddIcon
+
 import {
   SearchOutlined,
   FolderZipOutlined,
   NoteAddOutlined,
 } from '@mui/icons-material';
+
 
 // icons
 const icons = {
@@ -23,8 +27,10 @@ const icons = {
   AppstoreAddOutlined,
   UserOutlined,
   SearchOutlined,
+
   FolderZipOutlined,
   NoteAddOutlined,
+
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -50,10 +56,12 @@ const utilities = {
     },
     {
       id: 'util-shadow',
-      title: 'Archive',
+
+      title: 'Nouvelle Demande',
       type: 'item',
       url: '/scan',
-      icon: icons.FolderZipOutlined,
+      icon: icons.NoteAddIcon // Remplacement de l'icône par NoteAddIcon
+
     },
     {
       id: 'decharge',
