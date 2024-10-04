@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 // material-ui
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -63,7 +63,10 @@ export default function ProfileTab() {
         </ListItemIcon>
         <ListItemText primary="Billing" />
       </ListItemButton> */}
-      <ListItemButton selected={selectedIndex === 2}>
+      <ListItemButton
+      
+        component={Link} to="/login"
+      selected={selectedIndex === 2}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>

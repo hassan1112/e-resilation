@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -170,8 +170,15 @@ export default function Profile() {
                         </Stack>
                       </Grid>
                       <Grid item>
+
+                        {/* <Typography component={Link} to="/login">*/}
+                        {/* Don&apos;t have an account? */}
+                     {/* </Typography>*/}
+
+
                         <Tooltip title='Logout'>
                           <IconButton
+                            component={Link} to="/login"
                             size='large'
                             sx={{ color: 'text.primary' }}
                           >
