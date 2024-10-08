@@ -44,8 +44,8 @@ export default function DashboardDefault() {
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
       {/* row 1 */}
-      <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant='h5'>Dashboard</Typography>
+      <Grid item xs={12} sx={{ mt: 3,mb: -2.25 }}>
+        <Typography variant='h5'>Tableau de board</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <AnalyticEcommerce

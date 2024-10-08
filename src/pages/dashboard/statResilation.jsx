@@ -18,7 +18,9 @@ export default function StatResilation() {
     <>
       <Grid container alignItems='center' justifyContent='space-between'>
         <Grid item>
-          <Typography variant='h5'>Statistics de resilation</Typography>
+
+          <Typography variant="h5">Statistiques de résiliation</Typography>
+
         </Grid>
         <Grid item>
           <Stack direction='row' alignItems='center' spacing={0}>
@@ -28,7 +30,7 @@ export default function StatResilation() {
               color={slot === 'month' ? 'primary' : 'secondary'}
               variant={slot === 'month' ? 'outlined' : 'text'}
             >
-              Month
+              Mois
             </Button>
             <Button
               size='small'
@@ -36,7 +38,7 @@ export default function StatResilation() {
               color={slot === 'week' ? 'primary' : 'secondary'}
               variant={slot === 'week' ? 'outlined' : 'text'}
             >
-              Week
+              Semaine
             </Button>
           </Stack>
         </Grid>

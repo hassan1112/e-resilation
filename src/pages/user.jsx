@@ -109,18 +109,18 @@ const UserManagement = () => {
   return (
     <Box p={2} mt={3}>
       <Typography variant='h4' gutterBottom>
-        User Management
+        Gestion des utilisateurs
       </Typography>
 
       {/* Filters */}
       <Box mb={2} display='flex' justifyContent='space-between'>
-        <TextField label='Search User' variant='outlined' />
+        <TextField label='Rechercher un utilisateur' variant='outlined' />
         <Button
           variant='contained'
           color='primary'
           onClick={handleOpenAddModal}
         >
-          Add User
+          Ajouter un utilisateur
         </Button>
       </Box>
 
@@ -180,7 +180,7 @@ const UserManagement = () => {
       {/* Add User Modal */}
       <Modal open={openAddModal} onClose={handleCloseAddModal}>
         <Box sx={{ ...modalStyle }}>
-          <Typography variant='h6'>Add User</Typography>
+          <Typography variant='h6'>Ajouter un utilisateur</Typography>
           <form onSubmit={handleSubmit(addUser)}>
             <TextField
               label='Name'
@@ -219,7 +219,7 @@ const UserManagement = () => {
               <InputLabel id='user-type-label'>User Type</InputLabel>
               <Select
                 labelId='user-type-label'
-                label='User Type'
+                label='type utilisateur'
                 {...register('userType')}
               >
                 <MenuItem value='admin'>Admin</MenuItem>

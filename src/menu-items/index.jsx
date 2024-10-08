@@ -7,7 +7,7 @@ import userManagment from './user';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, pages, utilities, userManagment],
+  items: [dashboard, utilities, userManagment],
 };
 
 export default menuItems;

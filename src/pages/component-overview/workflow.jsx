@@ -50,7 +50,7 @@ function OrderStatus({ status }) {
 function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, onMouseLeave }) {
     return (
         <Grid item xs={12}>
-            <MainCard title="Search Results">
+            <MainCard title="Résultats de la recherche">
                 <Table>
                     <TableHead>
                         <TableRow>
