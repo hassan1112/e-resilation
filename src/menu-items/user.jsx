@@ -22,7 +22,7 @@ const userManagment = {
       type: 'item',
       url: '/user',
       icon: icons.GroupIcon,
-      breadcrumbs: false,
+      breadcrumbs: true,
     },
     {
       id: "droit d'access",
@@ -30,15 +30,16 @@ const userManagment = {
       type: 'item',
       url: '/roles',
       icon: icons.AddTaskIcon,
-      breadcrumbs: false,
+      breadcrumbs: true,
     },
     {
       id: 'CAU',
       title: 'CAU',
       type: 'item',
-      url: '/centre',
+      url: '/center',
       icon: icons.HomeWorkIcon,
-      breadcrumbs: false,
+
+      breadcrumbs: true,
     },
   ],
 };

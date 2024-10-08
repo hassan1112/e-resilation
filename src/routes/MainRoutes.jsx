@@ -9,9 +9,7 @@ const Recherche = Loadable(
   lazy(() => import('pages/component-overview/recherche'))
 );
 
-const CenterPage = Loadable(
-  lazy(() => import('pages/component-overview/center'))
-);
+const Center = Loadable(lazy(() => import('pages/component-overview/center')));
 const Scan = Loadable(lazy(() => import('pages/component-overview/scan')));
 const Workflow = Loadable(
   lazy(() => import('pages/component-overview/workflow'))
@@ -85,8 +83,8 @@ const MainRoutes = {
     },
 
     {
-      path: 'cau',
-      element: <CenterPage />,
+      path: 'center',
+      element: <Center />,
     },
   ],
 };
