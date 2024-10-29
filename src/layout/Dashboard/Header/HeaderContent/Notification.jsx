@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -34,7 +34,7 @@ import SettingOutlined from '@ant-design/icons/SettingOutlined';
 const avatarSX = {
   width: 36,
   height: 36,
-  fontSize: '1rem'
+  fontSize: '1rem',
 };
 
 const actionSX = {
@@ -44,7 +44,7 @@ const actionSX = {
   right: 'auto',
   alignSelf: 'flex-start',
 
-  transform: 'none'
+  transform: 'none',
 };
 
 // ============================== NOTIFICATION ||============================== //
@@ -72,16 +72,19 @@ export default function Notification() {
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <IconButton
-        color="secondary"
-        variant="light"
-        sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : 'transparent' }}
-        aria-label="open profile"
+        color='secondary'
+        variant='light'
+        sx={{
+          color: 'text.primary',
+          bgcolor: open ? iconBackColorOpen : 'transparent',
+        }}
+        aria-label='open profile'
         ref={anchorRef}
         aria-controls={open ? 'profile-grow' : undefined}
-        aria-haspopup="true"
+        aria-haspopup='true'
         onClick={handleToggle}
       >
-        <Badge badgeContent={read} color="primary">
+        <Badge badgeContent={read} color='primary'>
           <BellOutlined />
         </Badge>
       </IconButton>
@@ -92,23 +95,46 @@ export default function Notification() {
         role={undefined}
         transition
         disablePortal
-        popperOptions={{ modifiers: [{ name: 'offset', options: { offset: [matchesXs ? -5 : 0, 9] } }] }}
+        popperOptions={{
+          modifiers: [
+            { name: 'offset', options: { offset: [matchesXs ? -5 : 0, 9] } },
+          ],
+        }}
       >
         {({ TransitionProps }) => (
-          <Transitions type="grow" position={matchesXs ? 'top' : 'top-right'} in={open} {...TransitionProps}>
-            <Paper sx={{ boxShadow: theme.customShadows.z1, width: '100%', minWidth: 285, maxWidth: { xs: 285, md: 420 } }}>
+          <Transitions
+            type='grow'
+            position={matchesXs ? 'top' : 'top-right'}
+            in={open}
+            {...TransitionProps}
+          >
+            <Paper
+              sx={{
+                boxShadow: theme.customShadows.z1,
+                width: '100%',
+                minWidth: 285,
+                maxWidth: { xs: 285, md: 420 },
+              }}
+            >
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard
-                  title="Notification de resilation"
+                  title='Notification de resilation'
                   elevation={0}
                   border={false}
                   content={false}
                   secondary={
                     <>
                       {read > 0 && (
-                        <Tooltip title="Mark as all read">
-                          <IconButton color="success" size="small" onClick={() => setRead(0)}>
-                            <CheckCircleOutlined style={{ fontSize: '1.15rem' }} />
+                        <Tooltip title='Mark as all read'>
+                          <IconButton
+                            color='success'
+                            size='small'
+                            component={Link}
+                            to='/dashboard/default'
+                          >
+                            <CheckCircleOutlined
+                              style={{ fontSize: '1.15rem' }}
+                            />
                           </IconButton>
                         </Tooltip>
                       )}
@@ -116,22 +142,28 @@ export default function Notification() {
                   }
                 >
                   <List
-                    component="nav"
+                    component='nav'
                     sx={{
                       p: 0,
                       '& .MuiListItemButton-root': {
                         py: 0.5,
-                        '&.Mui-selected': { bgcolor: 'grey.50', color: 'text.primary' },
+                        '&.Mui-selected': {
+                          bgcolor: 'grey.50',
+                          color: 'text.primary',
+                        },
                         '& .MuiAvatar-root': avatarSX,
-                        '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
-                      }
+                        '& .MuiListItemSecondaryAction-root': {
+                          ...actionSX,
+                          position: 'relative',
+                        },
+                      },
                     }}
                   >
                     <ListItemButton selected={read > 0}>
                       <ListItemText
                         primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
+                          <Typography variant='h6'>
+                            <Typography component='span' variant='subtitle1'>
                               passport ordinaire
                             </Typography>{' '}
                             avec NNI:394847363 a resilier
@@ -140,7 +172,7 @@ export default function Notification() {
                         secondary="il y'a 2 min"
                       />
                       <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
+                        <Typography variant='caption' noWrap>
                           3:00 AM
                         </Typography>
                       </ListItemSecondaryAction>
@@ -152,10 +184,12 @@ export default function Notification() {
                     <Divider />
 
                     <Divider />
-                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                    <ListItemButton
+                      sx={{ textAlign: 'center', py: `${12}px !important` }}
+                    >
                       <ListItemText
                         primary={
-                          <Typography variant="h6" color="primary">
+                          <Typography variant='h6' color='primary'>
                             Voire Tous
                           </Typography>
                         }
