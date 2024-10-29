@@ -9,11 +9,15 @@ const Recherche = Loadable(
   lazy(() => import('pages/component-overview/recherche'))
 );
 
+
 const Center = Loadable(lazy(() => import('pages/component-overview/center')));
+const Recherche = Loadable(lazy(() => import('pages/component-overview/recherche')));
 const Scan = Loadable(lazy(() => import('pages/component-overview/scan')));
-const Workflow = Loadable(
-  lazy(() => import('pages/component-overview/workflow'))
-);
+const Workflow = Loadable(lazy(() => import('pages/component-overview/workflow')));
+const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
+
+const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+
 const Typography = Loadable(
   lazy(() => import('pages/component-overview/typography'))
 );
@@ -39,8 +43,10 @@ const MainRoutes = {
       element: <DashboardDefault />,
     },
     {
+
       path: 'recherche',
       element: <Recherche />,
+
     },
     {
       path: 'dashboard',
@@ -60,6 +66,7 @@ const MainRoutes = {
       element: <Shadow />,
     },
     {
+
       path: 'workflow',
       element: <Workflow />,
     },
@@ -87,6 +94,7 @@ const MainRoutes = {
       element: <Center />,
     },
   ],
+
 };
 
 export default MainRoutes;

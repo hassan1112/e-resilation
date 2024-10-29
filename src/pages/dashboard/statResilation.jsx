@@ -21,6 +21,7 @@ export default function StatResilation() {
 
           <Typography variant="h5">Statistiques de résiliation</Typography>
 
+
         </Grid>
         <Grid item>
           <Stack direction='row' alignItems='center' spacing={0}>

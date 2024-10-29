@@ -170,6 +170,7 @@ export default function Profile() {
                         </Stack>
                       </Grid>
                       <Grid item>
+
                         {/* <Typography component={Link} to="/login">*/}
                         {/* Don&apos;t have an account? */}
                         {/* </Typography>*/}
@@ -183,6 +184,7 @@ export default function Profile() {
                           >
                             <LogoutOutlined />
                           </IconButton>
+
                         </Tooltip>
                       </Grid>
                     </Grid>
