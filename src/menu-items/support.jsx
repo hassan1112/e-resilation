@@ -4,7 +4,7 @@ import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
 // icons
 const icons = {
   ChromeOutlined,
-  QuestionOutlined
+  QuestionOutlined,
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -19,7 +19,7 @@ const support = {
       title: 'Approval',
       type: 'item',
       url: '/sample-page',
-      icon: icons.ChromeOutlined
+      icon: icons.ChromeOutlined,
     },
     {
       id: 'documentation',
@@ -28,9 +28,9 @@ const support = {
       url: '#',
       icon: icons.QuestionOutlined,
       external: true,
-      target: true
-    }
-  ]
+      target: true,
+    },
+  ],
 };
 
 export default support;

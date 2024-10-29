@@ -3,20 +3,29 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
+import UserManagement from 'pages/user';
+import AssignUserToRole from 'pages/roles';
+const Recherche = Loadable(
+  lazy(() => import('pages/component-overview/recherche'))
+);
 
 
+const Center = Loadable(lazy(() => import('pages/component-overview/center')));
 const Recherche = Loadable(lazy(() => import('pages/component-overview/recherche')));
 const Scan = Loadable(lazy(() => import('pages/component-overview/scan')));
 const Workflow = Loadable(lazy(() => import('pages/component-overview/workflow')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
 
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+
 const Typography = Loadable(
   lazy(() => import('pages/component-overview/typography'))
 );
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
-const Decharge = Loadable(lazy(() => import('pages/component-overview/decharge')));
+const Decharge = Loadable(
+  lazy(() => import('pages/component-overview/decharge'))
+);
 
 // render - sample page
 const SamplePage = Loadable(
@@ -36,10 +45,7 @@ const MainRoutes = {
     {
 
       path: 'recherche',
-      element: <Recherche />
-
-      path: 'color',
-      element: <Color />,
+      element: <Recherche />,
 
     },
     {
@@ -62,21 +68,30 @@ const MainRoutes = {
     {
 
       path: 'workflow',
-      element: <Workflow />
+      element: <Workflow />,
     },
     {
       path: 'scan',
-      element: <Scan />
+      element: <Scan />,
     },
     {
       path: 'decharge',
-      element: <Decharge />
-    }
-    
-  ]
+      element: <Decharge />,
+    },
 
-      path: 'typography',
-      element: <Typography />,
+    {
+      path: 'user',
+      element: <UserManagement />,
+    },
+
+    {
+      path: 'roles',
+      element: <AssignUserToRole />,
+    },
+
+    {
+      path: 'center',
+      element: <Center />,
     },
   ],
 

@@ -16,9 +16,9 @@ function OrderStatus({ status }) {
             color = 'orange';
             title = 'En attente';
             break;
-        case 'Résilié':
+        case 'Validé':
             color = 'green';
-            title = 'Résilié';
+            title = 'Validé';
             break;
         case 'Rejeté':
             color = 'red';
@@ -58,8 +58,6 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                             <TableCell>Date d'ajout</TableCell>
                             <TableCell>Ajouté par</TableCell>
                             <TableCell>Statut</TableCell>
-                            <TableCell>Type document</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -71,9 +69,7 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     item.NNI.toLowerCase().includes(searchTerm) ||
                                     item.Num_Titre.toLowerCase().includes(searchTerm) ||
                                     item.addedDate.toLowerCase().includes(searchTerm) ||
-                                    item.Operateur.toLowerCase().includes(searchTerm) ||
-                                    item.typeDocument && item.typeDocument.toLowerCase().includes(searchTerm)
-
+                                    item.Operateur.toLowerCase().includes(searchTerm)
                                 );
                             })
                             .map((item) => (
@@ -95,8 +91,6 @@ function DataTable({ data, searchQuery, onRowClick, hoveredRow, onMouseEnter, on
                                     <TableCell>
                                         <OrderStatus status={item.status} />
                                     </TableCell>
-                                    <TableCell>{item.typeDocument}</TableCell>
-
                                 </TableRow>
                             ))}
                     </TableBody>
@@ -117,7 +111,6 @@ export default function Component() {
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
             status: 'Rejeté',
-            typeDocument: 'CIN',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -131,8 +124,7 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -146,8 +138,7 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -161,7 +152,6 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Permis',
             status: 'Rejeté',
             validatedBy: null,
             validationDate: null,
@@ -176,8 +166,7 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -191,8 +180,7 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'CIN',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -206,7 +194,6 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
             status: 'En attente',
             validatedBy: null,
             validationDate: null,
@@ -221,8 +208,7 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -236,7 +222,6 @@ export default function Component() {
             addedDate: '2024-01-01',
             Operateur: 'Admin',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Permis',
             status: 'En attente',
             validatedBy: null,
             validationDate: null,
@@ -251,8 +236,7 @@ export default function Component() {
             addedDate: '2024-06-01',
             Operateur: 'JohnDoe',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'Passport',
-            status: 'Résilié',
+            status: 'Validé',
             validatedBy: null,
             validationDate: null,
             rejectedBy: null,
@@ -266,7 +250,6 @@ export default function Component() {
             addedDate: '2024-03-01',
             Operateur: 'JaneSmith',
             pdfUrl: 'doc.pdf',
-            typeDocument: 'CIN',
             status: 'En attente',
             validatedBy: null,
             validationDate: null,
@@ -301,7 +284,7 @@ export default function Component() {
         setData((prevData) =>
             prevData.map((doc) =>
                 doc.requestId === selectedDocument.requestId
-                    ? { ...doc, status: 'Résilié', validatedBy: 'UtilisateurX', validationDate: new Date().toLocaleDateString() }
+                    ? { ...doc, status: 'Validé', validatedBy: 'UtilisateurX', validationDate: new Date().toLocaleDateString() }
                     : doc
             )
         );
