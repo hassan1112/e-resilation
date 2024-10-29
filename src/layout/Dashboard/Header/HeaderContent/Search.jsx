@@ -16,10 +16,10 @@ export default function Search() {
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
       <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
         <Box sx={{ mr: { xs: 2, md: 4 }, mb: { xs: 2, md: 0 } }}>
-          <img src={logo} alt="Logo" height={80} width={80} />
+          <img src={logo} alt='Logo' height={80} width={80} />
         </Box>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="h1" component="h1">
+          <Typography variant='h1' component='h1'>
             Agence nationale de titre sécurisé
           </Typography>
         </Box>

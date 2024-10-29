@@ -134,10 +134,10 @@ const UserManagement = () => {
               <TableCell>NNI</TableCell>
 
               <TableCell>fonction</TableCell>
-              <TableCell>Center</TableCell>
+              <TableCell>Centre</TableCell>
 
-              <TableCell>Status</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Statu</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -183,14 +183,14 @@ const UserManagement = () => {
           <Typography variant='h6'>Ajouter un utilisateur</Typography>
           <form onSubmit={handleSubmit(addUser)}>
             <TextField
-              label='Name'
+              label='Nom'
               {...register('name')}
               fullWidth
               margin='normal'
             />
             <TextField
               label='Prenom'
-              {...register('Prenom')}
+              {...register('prenom')}
               fullWidth
               margin='normal'
             />
@@ -215,8 +215,15 @@ const UserManagement = () => {
               margin='normal'
             />
 
+            <TextField
+              label='mode de pass'
+              {...register('password')}
+              type='password'
+              fullWidth
+              margin='normal'
+            />
             <FormControl fullWidth margin='normal'>
-              <InputLabel id='user-type-label'>User Type</InputLabel>
+              <InputLabel id='user-type-label'>Type d'utilisateur</InputLabel>
               <Select
                 labelId='user-type-label'
                 label='type utilisateur'
@@ -225,18 +232,18 @@ const UserManagement = () => {
                 <MenuItem value='admin'>Admin</MenuItem>
                 <MenuItem value='cc'>CC</MenuItem>
                 <MenuItem value='ing'>ING</MenuItem>
-                <MenuItem value='operator'>Operator</MenuItem>
+                <MenuItem value='operator'>Operateur</MenuItem>
               </Select>
             </FormControl>
 
             <TextField
-              label='center'
+              label='centre'
               {...register('center')}
               fullWidth
               margin='normal'
             />
             <Button type='submit' variant='contained' color='primary'>
-              Add
+              Adjouter
             </Button>
           </form>
         </Box>
@@ -245,7 +252,7 @@ const UserManagement = () => {
       {/* Edit User Modal */}
       <Modal open={openEditModal} onClose={handleCloseEditModal}>
         <Box sx={{ ...modalStyle }}>
-          <Typography variant='h6'>Edit User</Typography>
+          <Typography variant='h6'>Modifier l'utilisateur</Typography>
           <form onSubmit={handleSubmit(editUser)}>
             <TextField
               label='Name'
@@ -262,7 +269,7 @@ const UserManagement = () => {
               margin='normal'
             />
             <FormControl fullWidth margin='normal'>
-              <InputLabel id='user-type-label'>User Type</InputLabel>
+              <InputLabel id='user-type-label'>Type d'utilisateur</InputLabel>
               <Select
                 labelId='user-type-label'
                 label='User Type'
@@ -294,14 +301,23 @@ const UserManagement = () => {
             />
 
             <TextField
-              label='center'
+              label='password'
+              defaultValue={selectedUser?.password}
+              {...register('password')}
+              fullWidth
+              type='password'
+              margin='normal'
+            />
+
+            <TextField
+              label='centre'
               defaultValue={selectedUser?.center}
               {...register('center')}
               fullWidth
               margin='normal'
             />
             <Button type='submit' variant='contained' color='primary'>
-              Save
+              Enregistrer
             </Button>
           </form>
         </Box>
@@ -309,9 +325,11 @@ const UserManagement = () => {
 
       {/* Disable User Dialog */}
       <Dialog open={openDisableModal} onClose={handleCloseDisableModal}>
-        <DialogTitle>Disable User</DialogTitle>
+        <DialogTitle>Désactiver l'utilisateur</DialogTitle>
         <DialogContent>
-          <Typography>Are you sure you want to disable this user?</Typography>
+          <Typography>
+            Êtes-vous sûr de vouloir désactiver cet utilisateur ?
+          </Typography>
           <TextField label='Comments' fullWidth margin='normal' />
         </DialogContent>
         <DialogActions>
